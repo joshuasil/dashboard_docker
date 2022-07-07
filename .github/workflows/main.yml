@@ -65,16 +65,17 @@ jobs:
           run: docker login -u _ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
           env:
             HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
-        - name: Push to the registry
-          
-          run: |
-            docker login -u _ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
-            docker push ${{ env.HEROKU_REGISTRY_IMAGE }}
+
           
         - name: Set environment variables
           run: |
             echo "HEROKU_REGISTRY_IMAGE=${{ env.HEROKU_REGISTRY_IMAGE }}" >> $GITHUB_ENV
             echo "HEROKU_AUTH_TOKEN=${{ secrets.HEROKU_AUTH_TOKEN }}" >> $GITHUB_ENV
+        
+        - name: Push to the registry
+          
+          run: 
+            docker push ${{ env.HEROKU_REGISTRY_IMAGE }}
         - name: Release
           run: |
             chmod +x ./release.sh
