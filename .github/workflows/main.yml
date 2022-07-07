@@ -25,7 +25,7 @@ jobs:
 
           # The email address associated with your Heroku account.
           # If you don't want to use repository secrets (which is recommended) you can do:
-          email: joshva.silvasstar@ucdenver.edu
+          #email: joshva.silvasstar@ucdenver.edu
           #email: ${{ secrets.HEROKU_EMAIL }}
           
           # Heroku API key associated with provided user's email.
@@ -38,7 +38,7 @@ jobs:
           # (Optional, default: "./")
           # Dockerfile directory.
           # For example, if you have a Dockerfile in the root of your project, leave it as follows:
-          dockerfile_directory: ./project/Dockerfile.prod
+          dockerfile_directory: ./project/
 
           # (Optional, default: "Dockerfile")
           # Dockerfile name.
