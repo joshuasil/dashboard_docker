@@ -44,7 +44,7 @@ def plot_regression(std=10):
             x=_x_og,
             y=y,
             mode="markers",
-            name=f"x * (1 + rand_norm(mean=1, std={std}/10))",
+            name=f"x * (1 + rand_norm(mean=1, std={std}/10)) and change",
         )
     )
     fig.add_trace(go.Line(x=_x_og, y=preds, name="linear regression"))
