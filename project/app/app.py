@@ -1,90 +1,38 @@
-from dash import Dash, dcc, html, Input, Output
-import plotly.express as px
+import dash
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+from functions import plot_regression
 
-import pandas as pd
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
-app = Dash(__name__)
-
-df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv')
-
-app.layout = html.Div([
-    html.Div([
-
-        html.Div([
-            dcc.Dropdown(
-                df['Indicator Name'].unique(),
-                'Fertility rate, total (births per woman) Chris code',
-                id='xaxis-column'
-            ),
-            dcc.RadioItems(
-                ['Linear', 'Log'],
-                'Linear',
-                id='xaxis-type',
-                inline=True
-            )
-        ], style={'width': '48%', 'display': 'inline-block'}),
-
-        html.Div([
-            dcc.Dropdown(
-                df['Indicator Name'].unique(),
-                'Life expectancy at birth, total (years)',
-                id='yaxis-column'
-            ),
-            dcc.RadioItems(
-                ['Linear', 'Log'],
-                'Linear',
-                id='yaxis-type',
-                inline=True
-            )
-        ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-    ]),
-
-    dcc.Graph(id='indicator-graphic'),
-
-    dcc.Slider(
-        df['Year'].min(),
-        df['Year'].max(),
-        step=None,
-        id='year--slider',
-        value=df['Year'].max(),
-        marks={str(year): str(year) for year in df['Year'].unique()},
-
-    )
-])
+app.layout = html.Div(
+    [
+        html.Div(
+            [
+                dcc.Graph(id="regression_plot"),
+                html.P(
+                    "Standard Deviation", style={"color": "white", "marginLeft": "20px"}
+                ),
+                dcc.Slider(
+                    id="std_slider",
+                    min=0,
+                    max=40,
+                    step=0.5,
+                    value=10,
+                    marks={i: str(i) for i in range(0, 40, 5)},
+                ),
+            ]
+        ),
+    ]
+)
 
 
 @app.callback(
-    Output('indicator-graphic', 'figure'),
-    Input('xaxis-column', 'value'),
-    Input('yaxis-column', 'value'),
-    Input('xaxis-type', 'value'),
-    Input('yaxis-type', 'value'),
-    Input('year--slider', 'value'))
-def update_graph(xaxis_column_name, yaxis_column_name,
-                 xaxis_type, yaxis_type,
-                 year_value):
-    dff = df[df['Year'] == year_value]
-
-    fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'],
-                     y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'],
-                     hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name'])
-
-    fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
-
-    fig.update_xaxes(title=xaxis_column_name,
-                     type='linear' if xaxis_type == 'Linear' else 'log')
-
-    fig.update_yaxes(title=yaxis_column_name,
-                     type='linear' if yaxis_type == 'Linear' else 'log')
-
-    return fig
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
-
-
-# Developing the app locally with debug=True enables
-# auto-reloading when making changes
-# if __name__ == "__main__":
-#     app.run_server(host="0.0.0.0", port=8050, debug=True)
+    Output(component_id="regression_plot", component_property="figure"),
+    [Input(component_id="std_slider", component_property="value")],
+)
+def update_regression_plot(std):
+    return plot_regression(std)
