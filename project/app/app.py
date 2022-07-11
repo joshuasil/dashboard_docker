@@ -23,6 +23,8 @@ app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://joshva:Muscreen1!@ec2
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
+db = SQLAlchemy(app.server)
+
 app.layout = html.Div(
     [
         html.Div(
