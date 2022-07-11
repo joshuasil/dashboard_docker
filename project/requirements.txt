@@ -1,5 +1,3 @@
-appnope @ file:///opt/concourse/worker/volumes/live/8b5bd665-fe9a-4b43-55ab-604475fcb838/volume/appnope_1606859465017/work
-backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
 Brotli==1.0.9
 certifi==2021.5.30
 click==8.0.4
@@ -9,7 +7,6 @@ dash-core-components==2.0.0
 dash-html-components==2.0.0
 dash-table==5.0.0
 dataclasses==0.8
-decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
 entrypoints==0.3
 Flask==2.0.3
 Flask-Compress==1.12
@@ -21,33 +18,18 @@ itsdangerous==2.0.1
 jedi==0.17.0
 Jinja2==3.0.3
 joblib==1.1.0
-jupyter-client @ file:///opt/conda/conda-bld/jupyter_client_1643638337975/work
-jupyter-core @ file:///opt/concourse/worker/volumes/live/77bbbaa9-1646-4473-6813-2e409c0843a8/volume/jupyter_core_1633420134849/work
 MarkupSafe==2.0.1
-nest-asyncio @ file:///tmp/build/80754af9/nest-asyncio_1613680548246/work
 numpy==1.19.5
 pandas==1.1.5
-parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
-pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
-pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
 plotly==5.9.0
-prompt-toolkit @ file:///tmp/build/80754af9/prompt-toolkit_1633440160888/work
 psycopg2-binary==2.9.3
-ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
-Pygments @ file:///opt/conda/conda-bld/pygments_1644249106324/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 pytz==2022.1
-pyzmq @ file:///opt/concourse/worker/volumes/live/9d7ac74a-c2e0-4f27-6bc8-960d9f4f8edf/volume/pyzmq_1628276025927/work
 scikit-learn==0.24.2
 scipy==1.5.4
-six @ file:///tmp/build/80754af9/six_1644875935023/work
 sklearn==0.0
 SQLAlchemy==1.4.39
 tenacity==8.0.1
 threadpoolctl==3.1.0
-tornado @ file:///opt/concourse/worker/volumes/live/cd39df49-5c81-4c95-513c-5bb83298b7ef/volume/tornado_1606942310103/work
-traitlets @ file:///opt/concourse/worker/volumes/live/ab4b852a-8753-4f70-6083-433627bb8c3b/volume/traitlets_1632761183919/work
 typing_extensions==4.1.1
-wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
 Werkzeug==2.0.3
 zipp==3.6.0
