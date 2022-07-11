@@ -39,12 +39,12 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
-    Output(component_id="regression_plot", component_property="figure"),
-    [Input(component_id="std_slider", component_property="value")],
-)
-def update_regression_plot(std):
-    return plot_regression(std)
+# @app.callback(
+#     Output(component_id="regression_plot", component_property="figure"),
+#     [Input(component_id="std_slider", component_property="value")],
+# )
+# def update_regression_plot(std):
+#     return plot_regression(std)
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0",port=8050,debug=True)
