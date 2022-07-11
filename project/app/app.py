@@ -9,13 +9,14 @@ import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-server = app.server
+
 
 import psycopg2
 
-# conn = psycopg2.connect(dbname='chatbot_log', user='joshva', password='Muscreen1!', host='ec2-54-70-152-149.us-west-2.compute.amazonaws.com', port='5432', sslmode='require')
+conn = psycopg2.connect(dbname='chatbot_log', user='joshva', password='Muscreen1!', host='ec2-54-70-152-149.us-west-2.compute.amazonaws.com', port='5432', sslmode='require')
 
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 # df = pd.read_sql("select * from \"logs\"", conn)
 app.layout = html.Div(
     [
