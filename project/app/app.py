@@ -4,34 +4,26 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 from functions import plot_regression
+import pandas as pd
 
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
-# app requires "pip install psycopg2" as well
-
-server = Flask(__name__)
-app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True)
-app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# for your home PostgreSQL test table
-# app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:your_password@localhost/test"
-
-# for your live Heroku PostgreSQL database
-app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://joshva:Muscreen1!@ec2-54-70-152-149.us-west-2.compute.amazonaws.com:5432/chatbot_log"
-
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
-db = SQLAlchemy(app.server)
+import psycopg2
 
+conn = psycopg2.connect(dbname='chatbot_log', user='joshva', password='Muscreen1!', host='ec2-54-70-152-149.us-west-2.compute.amazonaws.com', port='5432', sslmode='require')
+
+df = pd.read_sql("select * from \"logs\"", conn)
 app.layout = html.Div(
     [
         html.Div(
             [
                 dcc.Graph(id="regression_plot"),
                 html.P(
-                    "Standard Deviation", style={"color": "white", "marginLeft": "20px"}
+                    "dataframe shape {}".format(df.shape), style={"color": "black", "marginLeft": "20px"}
                 ),
                 dcc.Slider(
                     id="std_slider",
